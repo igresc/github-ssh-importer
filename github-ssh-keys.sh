@@ -10,9 +10,9 @@ if [[ -n "$1" ]]; then
         echo "Exit"
         exit 0
     fi
-    # api_response=$(curl -s https://api.github.com/users/$1/keys) # Get ssh keys for user from Github api
+    api_response=$(curl -s https://api.github.com/users/$1/keys) # Get ssh keys for user from Github api
 
-    api_response=`cat json.json` # ONLY for testing Github api max requests
+    # api_response=`cat json.json` # ONLY for testing Github api max requests
 
     readarray -t array < <(sed -n "/{/,/}/{s/[^:]*:[[:blank:]]*//p}" <<<$api_response) # Convert json format into an string array
 
