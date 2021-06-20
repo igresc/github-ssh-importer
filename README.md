@@ -12,7 +12,7 @@ Move to the repo folder:
 
 To use the script you need to make it executable:
 
-    chmod +x github-ssh-key.sh
+    chmod +x github-ssh-keys.sh
 
 Then execute the script with your github username as an argument:
 
