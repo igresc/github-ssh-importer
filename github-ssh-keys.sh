@@ -16,13 +16,15 @@ if [[ -n "$1" ]]; then
 
     readarray -t array < <(sed -n "/{/,/}/{s/[^:]*:[[:blank:]]*//p}" <<<$api_response) # Convert json format into an string array
 
+    echo "#github-key-importer START" >> ~/.ssh/authorized_keys
     # From the array get the key and id, formatted to the correct form and added to the authoriezed_keys file.
     for i in "${!array[@]}"; do
         if [[ $((i % 2)) != 0 ]]; then
             echo "${array[i]} $1@github/${array[i - 1]} #github-key-importer" >>~/.ssh/authorized_keys
         fi
     done
-
+    echo "#github-key-importer END" >> ~/.ssh/authorized_keys
+    
     sed -i -E 's/"|,//g' ~/.ssh/authorized_keys # Remove double quotes
 else
     printf "illegal argument\n" >&2
